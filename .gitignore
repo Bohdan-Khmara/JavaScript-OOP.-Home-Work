@@ -1,0 +1,4 @@
+# All hidden file and dir
+.*
+# Don't ignore file .gitignore
+!.gitignore
