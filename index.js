@@ -1,70 +1,41 @@
 'use strict'
 
-let arr = [];
-
-class RangeValidator {
+class User {
     /**
      *
-     * Реализовать класс RangeValidator, со следующими свойствами:
-     ■  from (number);
-     ■  to (number);
-     Реализовать getter'ы и setter'ы для обоих свойств
-     Реализовать getter range, который будет возвращать массив с двумя числами диапазона
-     Реализовать метод validate, который будет принимать число и проверить входит ли число в указанный диапазон.
+     *Реализуйте класс Student (Студент), который будет наследовать от класса User.
+     * Этот класс должен иметь следующие свойства: name (имя, наследуется от User),
+     * surname (фамилия, наследуется от User), year (год поступления в вуз).
+     * Класс должен иметь метод getFullName() (наследуется от User), с помощью которого
+     * можно вывести одновременно имя и фамилию студента. Также класс должен иметь метод
+     * getCourse(), который будет выводить текущий курс студента (от 1 до 5). Курс вычисляется
+     * так: нужно от текущего года отнять год поступления в вуз. Текущий год получите самостоятельно.
      *
-     * @param {number} from
-     * @param {number} to
-     * @param {number} number
+     * @param {string} name
+     * @param {string} surname
+     * @param {number} year
      */
-    constructor(from, to, number) {
-        this.from = from;
-        this.to = to;
-        this.number = number;
+    constructor(name, surname, year) {
+        this._name = name;
+        this._surname = surname;
+        this._year = year;
     }
 
-    set from(v) {
-        if (typeof v !== 'number') {
-            throw new TypeError('Value must be number!');
-        }
-        this._from = arr.push(v);
+    getFullName() {
+        return `${this._name} ${this._surname}`;
     }
 
-    get from() {
-        return arr[0];
-    }
-
-    set to(v) {
-        if (typeof v !== 'number') {
-            throw new TypeError('Value must be number!');
-        }
-        if (v < arr[0]) {
-            throw new RangeError('Value must be greater than the initial');
-        }
-        this._to = arr.push(v);
-    }
-
-    get to() {
-        return arr[1];
-    }
-
-    set number(v) {
-        if (typeof v !== 'number') {
-            throw new TypeError('Value must be number!');
-        }
-        this._number = v;
-    }
-
-    get number() {
-        return this._number;
-    }
-
-    get getterRange() {
-        return arr;
-    }
-
-    get validate() {
-        return this.number >= arr[0] && this.number <= arr[1];
-    }
 }
 
-const value = new RangeValidator(10, 20, 15);
+class Student extends User {
+    constructor(name, surname, year, thisYear) {
+        super(name, surname, year);
+        this._thisYear = thisYear;
+    }
+    getCourse(){
+        return this._thisYear - this._year;
+    }
+
+}
+
+const student1 = new Student('Bohdan', 'Khmara', 2017, 2020);
